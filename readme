@@ -5,6 +5,7 @@
 注意，使用前请连接校园网以保证通讯通畅
 '''
 
+# 在包装的时候有没有注意过‘有些模块是隐藏导入的，但是pyinstaller打包时并未指定，所以执行时找不到此模块’
 import requests
 from lxml import etree
 import time
@@ -22,7 +23,7 @@ login.close()
 if data_name < '18000000' or data_name > '19000000':
     data_name = input("输入学号:")
     data_password = input("输入密码:")
-    login = open("logintext.txt", "w")
+    login = open("logintext.txt", "w", encoding='utf-8')
     login.write(data_name)
     login.write(data_password)
     login.close()
@@ -121,7 +122,6 @@ morn_rep_data = {
     'F_TARGET': 'p1_ctl00_btnSubmit',
     'p1_GeLSM_Collapsed': 'false',
     'p1_Collapsed': 'false',
-    # 下面这个ID每人独有一个， 请联系喻文杰获取详情
     'F_STATE': F_state
 }
 morn_rep_responce = session.post(url=morn_rep_url, headers=headers, data=morn_rep_data)
